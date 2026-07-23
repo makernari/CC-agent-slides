@@ -1,0 +1,218 @@
+
+/* =========================================================
+   FINAL 1600×900 REVIEW — 2026-07
+   Readability, overflow, navigation, image-fit, and print fixes
+   ========================================================= */
+
+/* Screen composition at 1600×900: wider slide, slimmer navigation. */
+@media screen and (max-width:1950px) {
+  .toolbar { width:250px; padding:18px 14px; }
+  main { margin-left:250px; padding:20px 0 80px; }
+  .cover, .slide {
+    transform:scale(.78);
+    transform-origin:top center;
+    margin-bottom:-172px;
+  }
+  .toolbar-course-title strong { font-size:19px; line-height:1.3; }
+  .toc-item { padding:10px 10px; margin:4px 0; }
+  .toc-item strong { font-size:14px; line-height:1.3; }
+}
+
+/* Long Korean labels wrap instead of overflowing cards. */
+.flow-card,
+.blueprint-card,
+.info-card,
+.matrix-cell,
+.story-step,
+.security-layer,
+.v7-card,
+.v7-step,
+.refined-key,
+.refined-output,
+td, th {
+  min-width:0;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+.step-flow { grid-template-columns:repeat(5,minmax(0,1fr)); }
+.step-flow.cards-4 { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.step-flow.cards-5 { grid-template-columns:repeat(5,minmax(0,1fr)); }
+.flow-card { min-width:0; padding:14px 10px; }
+.flow-card strong { font-size:28px; line-height:1.12; }
+.flow-card span { font-size:24px; line-height:1.2; }
+.flow-card .num { width:40px; height:40px; font-size:22px; }
+
+/* Refined HTML slides: use space for content, remove template-like duplication. */
+.slide.layout-refined .slide-body { grid-template-columns:70% 30%; gap:22px; }
+.refined-main { padding:20px; gap:13px; }
+.refined-side { gap:12px; }
+.refined-key { padding:17px 18px; }
+.refined-key .kicker { font-size:20px; }
+.refined-key .message { font-size:29px; line-height:1.25; }
+.refined-list { gap:10px; }
+.refined-list:empty { display:none; }
+.refined-list li { font-size:28px; line-height:1.25; padding:13px 14px 13px 48px; }
+.refined-output { padding:14px 16px; }
+.refined-output .label { font-size:19px; }
+.refined-output .text { font-size:27px; line-height:1.22; }
+
+/* Table readability: at least 28px while preserving available height. */
+.command-table, .schema-table { font-size:28px; border-spacing:0 7px; }
+.command-table th, .schema-table th,
+.command-table td, .schema-table td { font-size:28px; line-height:1.16; padding:9px 11px; }
+.v7-table.compact th, .v7-table.compact td { font-size:28px; line-height:1.12; padding:8px 10px; }
+
+/* Small-card families promoted to presentation size. */
+.blueprint-card strong { font-size:28px; line-height:1.12; }
+.blueprint-card span { font-size:24px; line-height:1.22; }
+.blueprint-head strong { font-size:30px; }
+.info-card strong { font-size:28px; }
+.info-card span { font-size:24px; line-height:1.25; }
+.matrix-cell strong { font-size:28px; }
+.matrix-cell span { font-size:24px; line-height:1.25; }
+.story-step strong { font-size:28px; }
+.lane h3 { font-size:28px; }
+.lane p { font-size:24px; line-height:1.35; }
+.security-layer strong { font-size:28px !important; }
+.security-layer span { font-size:24px !important; line-height:1.22 !important; }
+.compare-panel h3 { font-size:30px; }
+.compare-panel ul { font-size:28px; line-height:1.35; }
+
+/* V7 concrete-example slides. */
+.v7-kpi .kpi b { line-height:1.15; }
+.v7-kpi .kpi span { font-size:28px; }
+.v7-step strong { font-size:30px; }
+.v7-step span { font-size:26px; }
+
+/* Specific overflow corrections found during 192-page audit. */
+#slide-122 .v7-panel { padding:16px; }
+#slide-122 .v7-kicker { margin-bottom:8px; }
+#slide-122 .v7-matrix { grid-template-columns:82px 1fr 1fr; grid-template-rows:56px 1fr 1fr; gap:8px; }
+#slide-122 .v7-matrix .cell { padding:12px; gap:5px; }
+#slide-122 .v7-matrix .cell strong { font-size:31px; }
+#slide-122 .v7-matrix .cell span { font-size:25px; }
+#slide-146 .v7-flow { height:100%; }
+#slide-146 .v7-step { min-height:0; padding:9px 10px; }
+#slide-146 .v7-step .num { width:36px; height:36px; font-size:22px; margin-bottom:5px; }
+#slide-146 .v7-step strong { font-size:28px; }
+#slide-146 .v7-step span { font-size:23px; margin-top:4px; }
+
+/* Image slides: exact contain behavior and sufficient display area. */
+.slide.visual-framed .visual-frame { padding:8px; }
+.slide.visual-framed .framed-infographic {
+  width:100%; height:100%; max-width:100%; max-height:100%;
+  object-fit:contain !important; object-position:center center !important;
+  display:block; background:#fff;
+}
+
+/* Page number and footer are HTML overlays, never embedded in image. */
+.page-indicator { right:24px; bottom:18px; z-index:90; }
+.slide-footer { right:176px; }
+
+/* Notes stay hidden for presenting/printing; N key toggles them for the presenter. */
+.note { display:none; max-width:760px; font-size:18px; }
+body.show-notes .note { display:block !important; }
+
+/* Print/PDF: exactly one 1600×900 slide per page, no scaling or clipping. */
+@page { size:1600px 900px; margin:0; }
+@media print {
+  html, body { width:1600px; margin:0; background:#fff !important; }
+  .toolbar { display:none !important; }
+  main { margin:0 !important; padding:0 !important; }
+  .cover, .slide {
+    width:1600px !important; height:900px !important;
+    transform:none !important;
+    margin:0 !important;
+    box-shadow:none !important;
+    overflow:hidden !important;
+    page-break-after:always !important;
+    break-after:page !important;
+  }
+  .note { display:none !important; }
+  img { print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+}
+
+.toc-item.active{background:#163d63;box-shadow:inset 4px 0 0 #8ec5ff}.toc-item.active span{color:#fff}
+
+/* Specificity patch after legacy density rules */
+.slide.layout-refined .slide-body { grid-template-columns:72% 28% !important; }
+.slide.layout-refined.density-low .refined-list,
+.slide.layout-refined.density-high .refined-list { display:none !important; }
+.slide.layout-refined .refined-key .message,
+.slide.layout-refined .refined-output .text { font-size:30px !important; line-height:1.22 !important; }
+.slide.layout-refined .flow-card { overflow:hidden !important; }
+.slide.layout-refined .flow-card strong,
+.slide.layout-refined .flow-card span {
+  width:100%; min-width:0; white-space:normal !important;
+  word-break:break-all !important; overflow-wrap:anywhere !important;
+}
+.slide.layout-refined .flow-card strong { font-size:29px !important; }
+.slide.layout-refined .flow-card span { font-size:26px !important; }
+.slide.layout-refined .lane h3 { font-size:30px !important; }
+.slide.layout-refined .lane p { font-size:30px !important; line-height:1.24 !important; }
+#slide-122 .v7-matrix { height:calc(100% - 52px) !important; }
+
+
+.slide.layout-refined .slide-body {
+  grid-template-columns:minmax(0,72fr) minmax(0,28fr) !important;
+  overflow:hidden !important;
+}
+.slide.layout-refined .flow-card { overflow:visible !important; }
+.slide.layout-refined .flow-card:not(:last-child)::after { content:none !important; }
+.slide.layout-refined.density-low .refined-side { justify-content:space-between; }
+
+
+/* V3.1 — cover title/meta refinement */
+.toolbar-course-title strong {
+  white-space:normal;
+  line-height:1.32;
+}
+.cover h1 {
+  width:980px;
+  font-size:74px;
+  line-height:1.16;
+  margin:46px 0 24px;
+}
+.cover .subtitle {
+  width:980px;
+}
+.cover .cover-meta {
+  position:absolute;
+  z-index:3;
+  right:150px;
+  bottom:72px;
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:12px;
+  color:var(--navy);
+}
+.cover .cover-meta-line {
+  min-width:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  color:var(--navy);
+  font-size:32px;
+  font-weight:900;
+  line-height:1.2;
+  letter-spacing:-.02em;
+  text-align:right;
+  white-space:nowrap;
+}
+.cover .cover-meta-line.instructor {
+  font-size:30px;
+  color:var(--muted);
+}
+.cover .cover-meta-item, .cover .cover-meta-label {
+  display:none !important;
+}
+@media screen and (max-width:1950px) {
+  .toolbar-course-title strong { font-size:18px; line-height:1.32; }
+}
+@media print {
+  .cover .cover-meta { right:150px; bottom:72px; }
+}

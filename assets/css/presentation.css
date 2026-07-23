@@ -1,0 +1,270 @@
+
+/* ===== Final polish: unified numbering, cleaner cover, overflow-safe layouts ===== */
+.toolbar { padding-top:18px; }
+.toolbar .action-row { margin-top:0; }
+.cover .subtitle { width:1120px; font-size:30px; line-height:1.45; color:#334155; }
+
+/* One page indicator only: bottom-right, HTML overlay on every slide including image slides */
+.page-indicator {
+  position:absolute;
+  right:26px;
+  bottom:18px;
+  z-index:80;
+  min-width:108px;
+  height:42px;
+  padding:0 14px;
+  border:2px solid rgba(11,31,51,.22);
+  border-radius:12px;
+  background:rgba(255,255,255,.94);
+  color:#0b1f33;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:-.02em;
+  box-shadow:0 4px 14px rgba(11,31,51,.12);
+  backdrop-filter:blur(4px);
+}
+.slide.visual-full .page-indicator { right:24px; bottom:20px; }
+.slide-footer { right:178px; }
+.header-right:empty { display:none; }
+
+/* Remove design commentary from visible slide content */
+.layout-pill::before { content:none !important; }
+.layout-pill { padding:9px 17px; }
+
+/* Give diagrams the space previously consumed by duplicated hero copy */
+.slide.layout-refined .slide-body { height:620px; grid-template-columns:65% 35%; gap:24px; }
+.refined-main { gap:14px; padding:20px; }
+.refined-visual { justify-content:stretch; min-height:0; overflow:hidden; }
+.refined-side { gap:12px; min-height:0; }
+.refined-key { padding:17px 19px; }
+.refined-key .message { font-size:25px; line-height:1.28; }
+.refined-list { gap:9px; }
+.refined-list li { padding:12px 14px 12px 46px; font-size:19px; line-height:1.28; }
+.refined-list li::before { left:14px; top:12px; }
+.refined-output { padding:13px 16px; }
+.refined-output .text { font-size:19px; line-height:1.25; }
+
+/* Replace placeholder document skeleton with content-rich document blueprints */
+.document-blueprint { height:100%; display:grid; grid-template-columns:1.22fr .78fr; gap:16px; min-height:0; }
+.blueprint-sheet, .blueprint-aside { min-height:0; border:3px solid #c7d4e8; border-radius:20px; background:#fff; padding:16px; }
+.blueprint-sheet { display:flex; flex-direction:column; gap:8px; }
+.blueprint-head { display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:14px; background:#0b3d78; color:#fff; }
+.blueprint-head .blueprint-icon { width:40px; height:40px; border-radius:10px; display:grid; place-items:center; background:#fff; color:#0057b8; font-size:23px; font-weight:900; }
+.blueprint-head strong { font-size:24px; line-height:1.15; }
+.blueprint-row { display:grid; grid-template-columns:112px 1fr; gap:12px; align-items:center; padding:10px 12px; border:2px solid #dbe4f1; border-radius:13px; background:#f8fbff; min-height:48px; }
+.blueprint-row b { color:#0057b8; font-size:17px; }
+.blueprint-row span { color:#0b1f33; font-size:17px; line-height:1.25; font-weight:800; }
+.blueprint-aside { display:flex; flex-direction:column; gap:10px; background:#f4f8fe; }
+.blueprint-aside-title { padding:11px 12px; border-radius:13px; background:#dbeafe; color:#003f87; font-size:21px; font-weight:900; }
+.blueprint-card-grid { flex:1; display:grid; grid-template-columns:1fr 1fr; gap:10px; min-height:0; }
+.blueprint-card { border:2px solid #b9cae2; border-radius:14px; background:#fff; padding:12px; display:flex; flex-direction:column; justify-content:center; min-height:0; }
+.blueprint-card strong { color:#0b1f33; font-size:18px; margin-bottom:5px; }
+.blueprint-card span { color:#526277; font-size:15px; line-height:1.25; font-weight:800; }
+
+/* Overflow-safe security layout: 2 columns instead of a long clipped stack */
+.security-stack { display:grid !important; grid-template-columns:1fr 1fr; gap:10px; align-content:start; min-height:0; }
+.security-layer { grid-template-columns:56px 1fr !important; gap:10px !important; padding:10px 12px !important; min-height:92px; }
+.security-layer:nth-child(5) { grid-column:1 / -1; min-height:82px; }
+.security-layer .shield { width:46px !important; height:46px !important; font-size:24px !important; }
+.security-layer strong { font-size:20px !important; margin-bottom:3px !important; }
+.security-layer span { font-size:15px !important; line-height:1.22 !important; }
+
+/* General overflow protection for repeated refined layouts */
+.step-flow { height:100%; align-items:center; }
+.flow-card { min-height:118px; padding:13px 10px; }
+.flow-card strong { font-size:20px; }
+.flow-card span { font-size:14px; }
+.info-grid, .canvas-grid { height:100%; align-content:center; }
+.info-card { min-height:126px; padding:14px; }
+.info-card strong { font-size:21px; }
+.info-card span { font-size:15px; }
+.canvas-cell { min-height:112px; padding:13px; }
+.canvas-cell strong { font-size:20px; }
+.canvas-cell span { font-size:15px; }
+.matrix { min-height:0; height:100%; }
+.matrix-cell { padding:14px; }
+.matrix-cell strong { font-size:22px; }
+.matrix-cell span { font-size:16px; }
+.two-col-compare { height:100%; }
+.compare-panel { min-height:0; height:100%; max-height:360px; padding:18px; overflow:hidden; }
+.compare-panel h3 { font-size:24px; }
+.compare-panel ul { font-size:17px; line-height:1.42; }
+.swimlane { height:100%; align-items:center; }
+.lane { min-height:0; height:300px; }
+.lane p { font-size:17px; line-height:1.35; }
+.command-table, .schema-table { font-size:17px; }
+.command-table th, .schema-table th, .command-table td, .schema-table td { padding:9px 11px; }
+.terminal-box { font-size:22px; line-height:1.48; max-height:100%; overflow:hidden; }
+.storyline { height:100%; justify-content:center; gap:9px; }
+.story-step { padding:9px 13px; }
+.story-step strong { font-size:21px; }
+
+/* Grid tracks account for the inter-column gap and long technical paths wrap safely. */
+.slide.layout-refined .slide-body { grid-template-columns:minmax(0,13fr) minmax(0,7fr); }
+.refined-main, .refined-side, .refined-output .text, .refined-list li { min-width:0; overflow-wrap:anywhere; word-break:keep-all; }
+.refined-side { overflow:hidden; }
+
+@media print {
+  .page-indicator { right:20px; bottom:14px; box-shadow:none; background:#fff; }
+}
+
+
+/* =========================================================
+   V3 — Unified presentation system
+   ========================================================= */
+.toolbar { padding:22px 18px 28px; }
+.toolbar-course-title {
+  margin:0 0 20px;
+  padding:16px 15px 18px;
+  border-bottom:2px solid rgba(255,255,255,.28);
+}
+.toolbar-course-title span {
+  display:block; margin-bottom:7px; color:#8ec5ff;
+  font-size:12px; font-weight:900; letter-spacing:.12em;
+}
+.toolbar-course-title strong {
+  display:block; color:#fff; font-size:20px; line-height:1.32;
+  font-weight:900; letter-spacing:-.025em;
+}
+.action-row { display:none !important; }
+.header-right, .badge.demo, .badge.hands { display:none !important; }
+.slide-header { align-items:center; }
+.slide-header .part-name { font-size:21px; }
+
+/* Framed infographics: same bar/header/footer system as HTML slides */
+.slide.visual-framed {
+  padding:30px 48px 30px 64px;
+  background:#fff;
+}
+.slide.visual-framed::before { display:block; }
+.slide.visual-framed .slide-header { height:52px; }
+.slide.visual-framed .visual-frame {
+  height:742px;
+  margin-top:16px;
+  border:3px solid #cbd8e8;
+  border-radius:20px;
+  padding:10px;
+  background:#fff;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+.slide.visual-framed .framed-infographic {
+  width:100%; height:100%; max-width:100%; max-height:100%;
+  object-fit:contain; object-position:center; display:block; background:#fff;
+}
+.slide.visual-framed .slide-footer { left:64px; right:176px; bottom:18px; }
+
+/* Part divider slides */
+.slide.part-divider {
+  padding:68px 86px 44px 96px;
+  background:linear-gradient(135deg,#ffffff 0%,#f5f9ff 62%,#e6f1ff 100%);
+}
+.slide.part-divider::before { width:24px; }
+.part-divider-top { position:relative; z-index:2; width:1180px; }
+.part-divider-kicker {
+  display:inline-flex; align-items:center; min-height:44px; padding:0 18px;
+  border-radius:999px; background:var(--blue); color:#fff;
+  font-size:19px; font-weight:900; letter-spacing:.08em;
+}
+.part-divider h1 {
+  margin:34px 0 22px; color:var(--navy); font-size:74px; line-height:1.1;
+  letter-spacing:-.05em; max-width:1300px;
+}
+.part-divider-subtitle {
+  margin:0; max-width:1260px; color:#40536a; font-size:29px;
+  line-height:1.5; font-weight:750; letter-spacing:-.02em;
+}
+.part-divider-goals {
+  position:absolute; left:96px; right:86px; bottom:128px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+}
+.part-goal-card {
+  min-height:170px; padding:28px 28px; border:3px solid #bed0e6;
+  border-radius:24px; background:rgba(255,255,255,.92);
+  display:flex; flex-direction:column; justify-content:center; gap:16px;
+  box-shadow:0 10px 24px rgba(11,31,51,.08);
+}
+.part-goal-card span { color:var(--blue); font-size:20px; font-weight:900; letter-spacing:.08em; }
+.part-goal-card strong { color:var(--navy); font-size:29px; line-height:1.28; letter-spacing:-.03em; }
+.part-divider .slide-footer { left:96px; right:176px; bottom:26px; }
+
+/* Larger, less empty layouts for 76 editable HTML slides */
+.slide.layout-refined { padding:30px 48px 30px 64px; }
+.slide.layout-refined .slide-header { height:52px; }
+.slide.layout-refined .title-row { min-height:100px; height:100px; }
+.slide.layout-refined .title-row h1 { font-size:57px; line-height:1.12; }
+.slide.layout-refined .slide-body {
+  height:654px; grid-template-columns:minmax(0,62%) minmax(0,38%); gap:22px;
+}
+.refined-main { padding:22px; gap:14px; }
+.layout-pill { font-size:19px; padding:9px 17px; }
+.refined-visual { flex:1; justify-content:stretch; align-items:stretch; }
+.refined-visual > * { width:100%; }
+.refined-side { gap:11px; min-height:0; justify-content:space-between; }
+.refined-key { padding:18px 20px; }
+.refined-key .kicker { font-size:18px; }
+.refined-key .message { font-size:29px; line-height:1.27; }
+.refined-list { gap:10px; }
+.refined-list li { padding:15px 16px 15px 50px; font-size:21px; line-height:1.3; }
+.refined-list li::before { top:14px; }
+.refined-output { padding:15px 17px; }
+.refined-output .label { font-size:17px; }
+.refined-output .text { font-size:21px; line-height:1.28; }
+.slide.layout-refined .slide-footer { left:64px; right:176px; bottom:18px; }
+
+/* Density-aware sizing */
+.slide.layout-refined.density-low .slide-body { grid-template-columns:minmax(0,64%) minmax(0,36%); }
+.slide.layout-refined.density-low .refined-key .message { font-size:31px; }
+.slide.layout-refined.density-low .refined-list li { font-size:23px; padding-top:17px; padding-bottom:17px; }
+.slide.layout-refined.density-low .refined-output .text { font-size:23px; }
+.slide.layout-refined.density-high .refined-key .message { font-size:26px; }
+.slide.layout-refined.density-high .refined-list li { font-size:19px; padding-top:12px; padding-bottom:12px; }
+.slide.layout-refined.density-high .refined-output .text { font-size:19px; }
+
+/* Fill the visual area rather than floating small cards in the center */
+.step-flow {
+  position:relative; height:100%; min-height:0; align-items:center;
+  gap:26px; padding:22px 10px;
+}
+.step-flow.cards-4 { grid-template-columns:repeat(4,1fr); }
+.step-flow.cards-5 { grid-template-columns:repeat(5,1fr); }
+.flow-card {
+  position:relative; min-height:228px; padding:22px 12px;
+  box-shadow:0 8px 18px rgba(11,31,51,.06);
+}
+.flow-card:not(:last-child)::after {
+  content:'→'; position:absolute; right:-23px; top:50%; transform:translateY(-50%);
+  color:var(--blue); font-size:31px; font-weight:900; z-index:3;
+}
+.flow-card .num { width:42px; height:42px; font-size:20px; }
+.flow-card strong { font-size:25px; line-height:1.18; }
+.flow-card span { font-size:18px; line-height:1.3; }
+.info-grid, .canvas-grid, .formula-board, .two-col-compare, .document-blueprint,
+.security-stack, .storyline, .terminal-box, .command-table, .schema-table {
+  align-self:stretch;
+}
+.security-layer strong { font-size:22px !important; }
+.security-layer span { font-size:18px !important; line-height:1.32 !important; }
+.blueprint-row b, .blueprint-row span { font-size:19px; }
+.blueprint-card strong { font-size:20px; }
+.blueprint-card span { font-size:17px; }
+
+/* Page number is always an HTML overlay in the same lower-right position */
+.page-indicator {
+  right:28px; bottom:16px; min-width:116px; height:42px;
+  font-size:20px; z-index:90;
+}
+.slide-footer { right:176px !important; }
+
+/* Robust wrapping and clipping prevention */
+.slide * { overflow-wrap:anywhere; word-break:keep-all; }
+.refined-main, .refined-side, .refined-visual, .visual-frame { min-width:0; min-height:0; }
+
+@media print {
+  .slide.visual-framed .visual-frame { border-color:#cbd8e8; }
+}
